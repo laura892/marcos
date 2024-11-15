@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcial – Laura Pinzón</title>
+    <link rel="stylesheet" href="{% static '../static/Css/StylesVisualizar.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo">
+            <h1>TechPro UTS</h1>
+          </div>
+          <ul class="nav-links">
+            <li><a href="{% url 'Listar' %}">Lista de Solicitudes </a></li>
+            <li><a href="{% url 'Crear' %}">Crear Solicitud</a></li>
+          </ul>
+        </nav>
+      </header>
+    <h1>Cliente: {{ techpro.Cliente }}</h1>
+    <p>Tecnico: {{ techpro.Tecnico }}</p>
+    <p>Fecha Solicitud: {{ techpro.Fecha_Solicitud }}</p>
+    <p>Fecha Finalizacion: {{ techpro.Fecha_Finalizacion}}</p>
+    <p>Estado: {{ techpro.Estado }}</p>
+    <p>Descripcion: {{ techpro.Descripcion }}</p>
+<a href="{% url 'Editar' techpro.id %}">Actualizar Solicitud</a>
+<a href="{% url 'Eliminar' techpro.id %}">Eliminar Solicitud</a>
+<a href="{% url 'Listar' %}">Lista de Solicitudes </a>
+<footer>
+    <p>Realizado por: Laura Vanesa Pinzón Moncada</p>
+    <p>Número de documento: 1005485223</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPLEADOS</title>
+    <link rel="stylesheet" href="{% static 'Styles.css' %}">
+</head>
+<body>
+    <h1>Empleados</h1>
+<a href="{% url 'CrearEmpleado' %}">Agregar Empleado</a>
+
+
+<div id="ListarEmpleados">
+    {% for empleado in empleados %}
+    <p>Cedula: {{ empleado.Cedula }}</p>
+    <p>Nombre: {{ empleado.Nombre }}</p>
+    <p>Apellido:{{ empleado.Apellido }}</p>
+    <p>Fecha_Nacimiento: {{ empleado.Fecha_Nacimiento }}</p>
+    <p>Edad: {{ empleado.Edad }}</p>
+    <p>Cargo: {{ empleado.Cargo }}</p>
+    <p>email: {{ empleado.email }}</p>
+    <a href="{% url 'ActualizarEmpleado' empleado.id %}">Actualizar</a>
+    <a href="{% url 'EliminarEmpleado' empleado.id %}">Eliminar</a>
+    <a href="{% url 'BuscarEmpleado' empleado.id %}">Buscar</a>
+    {% endfor %}
+</div>
+</body>
+</html>

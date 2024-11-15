@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcial – Laura Pinzón</title>
+    <link rel="stylesheet" href="{% static '../static/Css/StylesCrear.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo">
+            <h1>TechPro UTS</h1>
+          </div>
+          <ul class="nav-links">
+            <li><a href="{% url 'Listar' %}">Lista de Solicitudes </a></li>
+          </ul>
+        </nav>
+      </header>
+    <h1>{% if form.instance.pk %}Actualizar{% else %}Crear{% endif %} solicitud</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Crear">
+    </form>
+    <footer>
+        <p>Realizado por: Laura Vanesa Pinzón Moncada</p>
+        <p>Número de documento: 1005485223</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcial – Laura Pinzón</title>
+    <link rel="stylesheet" href="{% static '../static/Css/StylesListar.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo">
+            <h1>TechPro UTS</h1>
+          </div>
+          <ul class="nav-links">
+            <li><a href="{% url 'Crear' %}">Crear Solicitud</a></li>
+          </ul>
+        </nav>
+      </header>
+    <h1>Solicitudes</h1>
+    <div id="Listar">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Técnico</th>
+              <th>Fecha Solicitud</th>
+              <th>Estado</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for solicitud in techpro %}
+            <tr>
+              <td>{{ solicitud.Cliente }}</td>
+              <td>{{ solicitud.Tecnico }}</td>
+              <td>{{ solicitud.Fecha_Solicitud }}</td>
+              <td>{{ solicitud.Estado }}</td>
+              <td>{{ solicitud.Descripcion }}</td>
+              <td>
+                <a href="{% url 'Editar' solicitud.id %}">Editar</a> |
+                <a href="{% url 'Eliminar' solicitud.id %}">Eliminar</a> |
+                <a href="{% url 'Visualizar' solicitud.id %}">Visualizar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    <footer>
+        <p>Realizado por: Laura Vanesa Pinzón Moncada</p>
+        <p>Número de documento: 1005485223</p>
+    </footer>
+</body>
+</html>

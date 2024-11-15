@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Usuarios</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <h1>Agregar Cliente</h1>
+<form action="{% url 'create_clientes' %}" method="post">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+   <input type="number" name="año" placeholder="Edad" required>
+    <input type="email" name="email" placeholder="Correo electronico" required>
+    <input type="text" name="contraseña" placeholder="Contraseña" required>
+    {% csrf_token %}
+    <button>Registrar</button>
+</form>
+<h1>Buscar Cliente</h1>
+<form action="{% url 'detail_clientes' %}" method="post">
+    <input type="number" name="id" placeholder="id" required>
+    {% csrf_token %}
+    <button>Buscar</button>
+</form>
+
+{% if clienteid %}
+    <h1>Cliente Encontrado</h1>
+    <div>
+        <p>ID: {{ clienteid.id }}</p>
+        <p>Nombre: {{ clienteid.Nombre }}</p>
+        <p>Edad: {{ clienteid.Año }}</p>
+        <p>Correo: {{ clienteid.email }}</p>
+        <p>Contraseña:{{ clienteid.Contraseña }}</p>
+        <form action="{% url 'delete_clientes' clienteid.id %}" method="post">
+            {% csrf_token %}
+            <button>Eliminar</button>
+        </form>
+            <button id="edit">Actualizar</button>
+            <form class="form-edit" id="form-edit" style="display: none; justify-content: center; align-items: center; flex-direction: column;" action="{% url 'update_clientes'  clienteid.id %}" method="post">
+                <h1>Actualizar Cliente</h1> 
+                <input type="text" name="Nombre" placeholder="Nombre" required>
+                <input type="number" name="Año" placeholder="Edad" required>
+                <input type="email" name="email" placeholder="Correo electronico" required>
+                {% csrf_token %}
+                <button>Guardar</button>
+            </form>
+    </div>
+{% endif %}
+
+
+{% if clientes %}
+<h1>Clientes Registrados</h1>
+{% endif %}
+
+{% for cliente in clientes %}
+	<div>
+  <p>Nombre:   {{ cliente.Nombre }}</p>
+    <p>Edad: {{ cliente.Año }}</p>
+    <p>Correo: {{ cliente.email }}</p>
+    <form action="{% url 'delete_clientes' cliente.id %}" method="post">
+         {% csrf_token %}
+        <button>Eliminar</button>
+    </form>
+    </div>
+    {% empty %}
+    <H1>No hay usuarios registrados</H1>
+{% endfor %}
+</body>
+<script src="{% static '../static/index.js' %}"></script>
+</html>
